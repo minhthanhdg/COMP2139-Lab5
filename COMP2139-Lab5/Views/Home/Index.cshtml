@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FAQ>
+@{
+    ViewBag.Title = "FAQs";
+}
+
+<div class="row">
+    <div class="col">
+        @foreach(Topic t in ViewBag.Topics)
+        {
+            <a asp-action="Index" asp-route-topic="@t.TopicId">@t.Name</a>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        @foreach (Category c in ViewBag.Categories)
+        {
+            <a asp-action="Index"
+               asp-route-category="@c.CategoryId"
+               asp-route-topic="@ViewBag.SelectedTopic">@c.Name</a>
+        }
+    </div>
+    <div class="col">
+        <ul>
+            @foreach(FAQ faq in Model)
+            {
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            <b>@faq.Question</b>@faq.Answer
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Topic: @faq.Topic.Name
+                        </div>
+                        <div class="col">Category: @faq.Category.Name</div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
